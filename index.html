@@ -38,6 +38,8 @@
   --t-fast: .25s var(--ease);
   --t: .5s var(--ease);
 
+  --hero-img: url("assets/hero.jpg"); /* photo de fond du hero — remplaçable */
+
   --header-h: 64px;
   --banner-h: 36px;
 
@@ -165,6 +167,18 @@ h1,h2,h3{font-family:'Space Grotesk';line-height:1.1;letter-spacing:-.01em}
 .hero{
   position:relative;padding-top:calc(var(--banner-h) + var(--header-h) + clamp(48px,9vw,96px));
   padding-bottom:clamp(64px,10vw,110px);overflow:hidden;
+}
+/* Fond hero : circuit (haut) + dégradé sombre (lisibilité) + photo (bas) */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    var(--circuit),
+    linear-gradient(90deg, rgba(10,22,40,.97) 0%, rgba(10,22,40,.86) 42%, rgba(10,22,40,.48) 100%),
+    linear-gradient(0deg, rgba(10,22,40,.92) 0%, rgba(10,22,40,.30) 38%, rgba(10,22,40,.10) 100%),
+    var(--hero-img);
+  background-size:240px, cover, cover, cover;
+  background-position:center, center, center, center 35%;
+  background-repeat:repeat, no-repeat, no-repeat, no-repeat;
 }
 .hero::after{content:"";position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;max-width:720px;max-height:720px;
   background:radial-gradient(circle,rgba(14,165,233,.10),transparent 62%);pointer-events:none;z-index:0}
